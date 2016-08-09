@@ -136,6 +136,10 @@ class AppForm(QtGui.QMainWindow):
             print(self.specter.temperature[self.currentSpecter])
             self.axes2.plot(self.specter.temperature[self.currentSpecter][0]['Ek'],self.specter.temperature[self.currentSpecter][0]['nkgk'],'.')
 
+            t = np.arange(min(self.specter.temperature[self.currentSpecter][0]['Ek']),max(self.specter.temperature[self.currentSpecter][0]['Ek']))
+            self.axes2.plot(t, self.specter.temperature[self.currentSpecter][1][0]*t+self.specter.temperature[self.currentSpecter][1][1], 'r--')
+
+
         self.canvas.draw()
 
     def loadSpecterFromFiles(self):
@@ -169,7 +173,9 @@ class AppForm(QtGui.QMainWindow):
 
         #test case
         self.lines.append((244,265,250,10,3000,2))
-        self.lines.append((305,343,325,10,2000,2))
+        self.lines.append((305,343,325,10,2500,2))
+        self.lines.append((405,435,325,10,2300,2))
+        self.lines.append((605,650,325,10,2000,2))
         self.updateTable()
         self.on_draw()
 
