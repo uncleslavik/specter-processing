@@ -27,7 +27,7 @@ class Specter:
             self.dataCombinedHalf=np.array(colCombine)   # half of a specter? combined from 2 halves
         """
 
-    def smooth(self,x,window_len=51,window='hanning'):
+    def smooth(self,x,window_len=151,window='hamming'):
         """smooth the data using a window with requested size.
 
         This method is based on the convolution of a scaled window with the signal.
@@ -58,6 +58,7 @@ class Specter:
             print("Window is on of 'flat', 'hanning', 'hamming', 'bartlett', 'blackman'")
 
 
+
         s=np.r_[x[window_len-1:0:-1],x,x[-1:-window_len:-1]]
 
         if window == 'flat': #moving average
@@ -67,7 +68,10 @@ class Specter:
 
         y=np.convolve(w/w.sum(),s,mode='valid')
 
-        return y[(window_len/2-1):-(window_len/2)] #NOTE: length(output) != length(input), to correct this: return y[(window_len/2-1):-(window_len/2)] instead of just y.
+        print(len(x))
+        print(len(y[(window_len/2):-(window_len/2)]))
+
+        return y[(window_len/2):-(window_len/2)] #NOTE: length(output) != length(input), to correct this: return y[(window_len/2-1):-(window_len/2)] instead of just y.
 
     def split(self,F,center):
         left=F[0:center-1]
@@ -88,3 +92,10 @@ class Specter:
 
     def combine(self,split):
         return (split[:,0]+split[:,1])/2
+
+    @staticmethod
+    def diff(F):
+        res = np.zeros(len(F))
+        diff = np.diff(F)
+        res[0:len(F) - 1] = diff[:]
+        return res

@@ -22,7 +22,7 @@ class Tempereture:
             Ek=line[4]
             g=line[5]
             if intLine>0:
-                nkgk=np.log(intLine/((h*c*Aki*g)/lambdaNist))
+                nkgk=np.log(intLine/((h*c*g*Aki*10**8)/(lambdaNist*10**-9)))
                 tempData['Ek'].append(Ek)
                 tempData['nkgk'].append(nkgk)
 
@@ -30,6 +30,6 @@ class Tempereture:
         if len(tempData['Ek'])>0 and len(tempData['nkgk'])>0:
 
             koef=np.polyfit(tempData['Ek'], tempData['nkgk'], 1)
-            temp=koef[0]
+            temp=-koef[0]
 
         return (tempData,koef,temp)
