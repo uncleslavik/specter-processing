@@ -218,6 +218,9 @@ class AppForm(QtGui.QMainWindow):
         self.lines.append((861, 865, 862.9, 0.238, 12.127, 4))
         self.lines.append((1009, 1012, 1010.5, 0.373, 12.98, 28))
 
+        self.lines.append((861, 865, 862.9, 0.238, 12.127, 4))
+        self.lines.append((1009, 1012, 1010.5, 0.373, 12.98, 28))
+
 
         self.updateTable()
         self.on_draw()
